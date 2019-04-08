@@ -10,10 +10,15 @@ import 'bootstrap/dist/css/bootstrap.css';
 import createSagaMiddleware from 'redux-saga';
 import { watcherSaga } from "./sagas/usersSaga";
 
+// dev tools middleware
+const reduxDevTools =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
     allReducers, 
-    compose(applyMiddleware(sagaMiddleware))
+    compose(applyMiddleware(sagaMiddleware), reduxDevTools)
 );
 
 sagaMiddleware.run(watcherSaga);
